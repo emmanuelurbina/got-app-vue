@@ -3,7 +3,8 @@ const MainArea = {
         `
 <div class="cotainer-fluid">
                 <h1 class="main-title">Valar Morghulis...</h1>
-                <h2 class="main-subtitle">Who's next?</h2>
+                <h2 class="main-subtitle" ref="info"
+                data-toggle="tooltip" data-placement="bottom" title="Click en el personaje!">Who's next?</h2>
                 
                 <div class="row">
                     <div v-show="isAboutOpen" class="text-center text-md-left" :class="quoteClass" id="quote-area">
@@ -44,7 +45,8 @@ const MainArea = {
                         <div class="btn-area d-flex justify-content-center">
                             <div v-if = "!takingScreenshoot" class="btn-container d-flex justify-content-between">
                                 <button class="btn btn-light" @click="randomAll">Random</button>
-                                <button id="about" class="btn btn-light" @click="aboutToggle()"c ref = "btnAbout" >About</button>
+                                <button id="about" class="btn btn-light" @click="aboutToggle()"c ref = "btnAbout"
+                                data-toggle="tooltip" data-placement="bottom" title="Información del personaje">About</button>
                                 <button class="btn btn-light" @click="takeScreenshoot">Download</button>
                             </div>
                         </div>
@@ -69,7 +71,10 @@ const MainArea = {
                 </div>
 </div>
 `,
+    
+    
     data() {
+        
         return {
             fileParts: bodies,
             randomHead: false,
@@ -102,6 +107,9 @@ const MainArea = {
     },
     components: {
         PartSelector
+    },
+    mounted(){
+        $(this.$refs.info).tooltip('show')
     },
     methods: {
         randomAll: function () {
