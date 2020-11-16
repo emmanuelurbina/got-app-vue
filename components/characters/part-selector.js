@@ -37,9 +37,11 @@ const PartSelector = {
     methods: {
         selectPrevPart: function () {
             this.selectedPartIndex = this.selectedPartIndex > this.minIndex ? this.selectedPartIndex - 1 : this.maxIndex
+            this.emitSelected()
         },
         selectNextPart: function () {
             this.selectedPartIndex = this.selectedPartIndex < this.maxIndex ? this.selectedPartIndex + 1 : this.minIndex
+            this.emitSelected()
         }, 
         emitSelected: function(){
             this.$emit('partSelected', this.selectedPart)
@@ -49,7 +51,7 @@ const PartSelector = {
     watch: {
         rand: function (val) {
             if (val == true) {
-                this.selectedPartIndex = Math.floor(Math.random() * (this.maxIndex - this.minIndex + 1)) + this.minIndex
+                this.selectedPartIndex = getRandom(this.minIndex, this.maxIndex)
                 this.$emit("randomInvoked", true)
                 this.emitSelected()
             }
